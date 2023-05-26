@@ -3,12 +3,7 @@ const { ccclass, property } = _decorator;
 
 @ccclass('AudioController')
 export class AudioController extends Component {
-    start() {
 
-    }
 
-    update(deltaTime: number) {
-        
-    }
 }
 
