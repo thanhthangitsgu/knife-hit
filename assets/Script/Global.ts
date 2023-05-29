@@ -19,6 +19,7 @@ export class Global extends Component {
         Entry: "Entry", 
         Menu: "Menu", 
         Game: "Game", 
+        End: "End"
     }
 
 }

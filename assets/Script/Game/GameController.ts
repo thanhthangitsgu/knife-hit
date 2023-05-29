@@ -1,5 +1,5 @@
 import { Knife } from './Knife';
-import { _decorator, Collider2D, Component, Contact2DType, Input, input, instantiate, Node, Prefab, UITransform, sp, Vec3, Quat, math, Label } from 'cc';
+import { _decorator, Collider2D, Component, Contact2DType, Input, input, instantiate, Node, Prefab, UITransform, sp, Vec3, Quat, math, Label, director } from 'cc';
 import { WoodView } from './WoodView';
 import { AUDIO_TYPE, GAME_STATUS, KNIFE_STATUS, WOOD_ANIMATION } from '../Enum';
 import { Global } from '../Global';
@@ -95,9 +95,6 @@ export class GameController extends Component {
     }
 
     protected start(): void {
-        //Handle on click
-        input.on(Input.EventType.MOUSE_DOWN, this.onClick, this);
-
         this.widthWood = this.woodSpr.getComponent(UITransform).width / 2 - 50;
     }
 
@@ -105,12 +102,15 @@ export class GameController extends Component {
         switch (Global.status) {
             case GAME_STATUS.GAME_READY: {
                 this.loadData();
+                break;
             }
             case GAME_STATUS.GAME_PLAYING: {
                 this.moveKnife();
+                break;
             }
             case GAME_STATUS.GAME_OVER: {
-
+                director.loadScene(Global.SCENE_NAME.End);
+                break;
             }
         }
 
@@ -118,6 +118,10 @@ export class GameController extends Component {
 
     //**Load game data */
     private loadData(): void {
+        if (Global.gameStage >= GAME_DATA.length) {
+            director.loadScene(Global.SCENE_NAME.Menu);
+            Global.gameStage = 1;
+        }
         //Load game data
         this.amount = GAME_DATA[Global.gameStage - 1].knife;
         this.lbStage.string = `STAGE ${Global.gameStage}`;
@@ -138,6 +142,10 @@ export class GameController extends Component {
             this.listAmount.push(element);
         }
         Global.status = GAME_STATUS.GAME_PLAYING;
+
+        setTimeout(() => {
+            input.on(Input.EventType.MOUSE_DOWN, this.onClick, this);
+        }, 400);
     }
 
     //Handle on click
@@ -151,6 +159,7 @@ export class GameController extends Component {
         this.amount--;
         if (this.amount <= 0) {
             this.audioController.playAudio(AUDIO_TYPE.LastHit);
+            input.off(Input.EventType.MOUSE_DOWN);
             setTimeout(() => {
                 this.passStage();
             }, 500);
