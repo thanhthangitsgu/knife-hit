@@ -3,8 +3,6 @@ import { _decorator, Collider2D, Component, Contact2DType, Input, input, instant
 import { WoodView } from './WoodView';
 import { KNIFE_STATUS } from '../Enum';
 const { ccclass, property, requireComponent } = _decorator;
-const { spine } = sp;
-const { MathUtils } = spine;
 
 @ccclass('GameController')
 @requireComponent(Prefab)
@@ -35,11 +33,27 @@ export class GameController extends Component {
 
     private listKnife: Node[] = [];
 
+    private widthWood: number;
+
     protected onLoad(): void {
+        //Generate the first knife
         this.generateKnife();
 
         //Handle on click
         input.on(Input.EventType.MOUSE_DOWN, this.generateKnife, this);
+
+        this.widthWood = this.woodSpr.getComponent(UITransform).width / 2 - 50;
+    }
+
+    protected update(dt: number): void {
+        for (let i = 0; i < this.listKnife.length - 1; i++) {
+            const knife = this.listKnife[i];
+            let angle = knife.getComponent(Knife).getAngle();
+            let position = new Vec3(this.widthWood * Math.cos(3.14 * (this.woodSpr.eulerAngles.z + angle) / 180), this.widthWood * Math.sin((this.woodSpr.eulerAngles.z + angle) * 3.14 / 180), 0);
+            knife.setPosition(this.convert(this.wood, knife.parent, position));
+            knife.setRotationFromEuler(new Vec3(0, 0, this.woodSpr.eulerAngles.z + angle + 90))
+            const col = knife.getComponent(Collider2D).tag = 2;
+        }
     }
 
     /**Convert @vector from @entry to @end  */
@@ -53,16 +67,16 @@ export class GameController extends Component {
 
     /** Create the knife */
     private generateKnife(): void {
+        //Push
+        let pos = new Vec3(0, -this.wood.getComponent(UITransform).width / 2 + 50, 0);
+        if (this.listKnife.length > 0) {
+            this.listKnife[this.listKnife.length - 1].getComponent(Knife).move(this.convert(this.wood, this.poolKnife, pos));
+            this.listKnife[this.listKnife.length - 1].getComponent(Knife).setAngle(-this.woodSpr.eulerAngles.z - 100);
+        }
         //Init 
         let element = instantiate(this.knifePrefab);
         this.poolKnife.addChild(element);
         this.listKnife.push(element);
-
-        //Push
-        let pos = new Vec3(0, -this.wood.getComponent(UITransform).width / 2 + 50, 0);
-        if (this.listKnife.length > 1) {
-            this.listKnife[this.listKnife.length - 1].getComponent(Knife).move(this.convert(this.wood, this.poolKnife, pos));
-        }
     }
 }
 

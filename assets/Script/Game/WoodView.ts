@@ -6,8 +6,7 @@ const { MathUtils } = spine;
 @ccclass('WoodView')
 @requireComponent(UITransform)
 export class WoodView extends Component {
-    private rotation: number = 180;
-    private speed: number = 20;
+    private speed: number = 200;
 
     @property({
         type: Node,
@@ -15,21 +14,15 @@ export class WoodView extends Component {
     private knife: Node;
 
     protected onLoad(): void {
-
     }
 
     protected update(dt: number): void {
-        this.rotation -= this.speed * dt;
-        if (this.rotation <= -180) this.rotation = 180;
-
-          //Init quat
-          let quat: Quat = new Quat;
-          Quat.fromEuler(quat, 0, 0, this.rotation);
-          this.node.setRotation(quat);
+        let r = this.node.eulerAngles.z + this.speed * dt;
+        this.node.setRotationFromEuler(new Vec3(0, 0, r));
     }
 
     public getRotation(): number {
-        return this.rotation;
+        return this.node.eulerAngles.z
     }
 }
 
