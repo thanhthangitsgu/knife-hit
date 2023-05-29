@@ -7,4 +7,18 @@ const { ccclass, property } = _decorator;
 export class Global extends Component {
     //Game status
     public static status: GAME_STATUS = GAME_STATUS.GAME_READY;
+
+    //Game score
+    public static score: number = 0;
+
+    //Game stage
+    public static gameStage = 1;
+
+    //Scene name
+    public static readonly SCENE_NAME = {
+        Entry: "Entry", 
+        Menu: "Menu", 
+        Game: "Game", 
+    }
+
 }

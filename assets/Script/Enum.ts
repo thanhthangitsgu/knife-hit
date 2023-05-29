@@ -1,3 +1,5 @@
+import { AudioClip } from "cc"
+
 //Enum of project   
 export enum KNIFE_STATUS {
     INIT,
@@ -10,3 +12,19 @@ export enum GAME_STATUS {
     GAME_PLAYING,
     GAME_OVER,
 }
+
+export enum WOOD_ANIMATION {
+    Appear,
+    Hit
+}
+
+export enum AUDIO_TYPE {
+    Appear,
+    Hit,
+    LastHit
+}
+
+export type MapType = {
+    [id: string]: any
+}
+

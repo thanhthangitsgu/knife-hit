@@ -21,22 +21,22 @@
         "__id__": 3
       },
       {
-        "__id__": 62
-      },
-      {
-        "__id__": 63
+        "__id__": 65
       },
       {
         "__id__": 66
       },
       {
-        "__id__": 67
+        "__id__": 71
+      },
+      {
+        "__id__": 76
       }
     ],
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 70
+      "__id__": 79
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -67,7 +67,7 @@
     },
     "autoReleaseAssets": false,
     "_globals": {
-      "__id__": 71
+      "__id__": 80
     },
     "_id": "a1bc5511-2272-446a-ab80-dab904099cc7"
   },
@@ -145,18 +145,21 @@
       },
       {
         "__id__": 52
+      },
+      {
+        "__id__": 59
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 59
+        "__id__": 62
       },
       {
-        "__id__": 60
+        "__id__": 63
       },
       {
-        "__id__": 61
+        "__id__": 64
       }
     ],
     "_prefab": null,
@@ -1991,7 +1994,7 @@
     },
     "_enabled": true,
     "__prefab": null,
-    "knife": null,
+    "wood": null,
     "_id": "52As83S9pH8I/ppK7CaX9b"
   },
   {
@@ -2040,6 +2043,105 @@
       "y": 0.5
     },
     "_id": "5buHS7yr5CpoR24PyyieoN"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "Amount",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 3
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 60
+      },
+      {
+        "__id__": 61
+      }
+    ],
+    "_prefab": null,
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": -252.765,
+      "y": -407.268,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_mobility": 0,
+    "_layer": 33554432,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": "eeBJnAzulJ+IgHT9PEmo5z"
+  },
+  {
+    "__type__": "cc.UITransform",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 59
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 100,
+      "height": 100
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_id": "3dUJSTcjdJK5HgH4QnIAoK"
+  },
+  {
+    "__type__": "cc.Layout",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 59
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "_resizeMode": 0,
+    "_layoutType": 2,
+    "_cellSize": {
+      "__type__": "cc.Size",
+      "width": 40,
+      "height": 40
+    },
+    "_startAxis": 0,
+    "_paddingLeft": 0,
+    "_paddingRight": 0,
+    "_paddingTop": 0,
+    "_paddingBottom": 0,
+    "_spacingX": 0,
+    "_spacingY": 0,
+    "_verticalDirection": 0,
+    "_horizontalDirection": 0,
+    "_constraint": 0,
+    "_constraintNum": 2,
+    "_affectedByScale": false,
+    "_isAlign": true,
+    "_id": "b6e2HKiIFIrqVhDug37OCP"
   },
   {
     "__type__": "cc.UITransform",
@@ -2155,7 +2257,10 @@
     },
     "_children": [
       {
-        "__id__": 64
+        "__id__": 67
+      },
+      {
+        "__id__": 74
       }
     ],
     "_active": true,
@@ -2195,13 +2300,13 @@
     "_name": "@GameController",
     "_objFlags": 512,
     "_parent": {
-      "__id__": 63
+      "__id__": 66
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 65
+        "__id__": 68
       }
     ],
     "_prefab": null,
@@ -2239,7 +2344,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 64
+      "__id__": 67
     },
     "_enabled": true,
     "__prefab": null,
@@ -2249,14 +2354,101 @@
     "woodSpr": {
       "__id__": 53
     },
+    "poolKnife": {
+      "__id__": 9
+    },
+    "knifeContainer": {
+      "__id__": 59
+    },
     "knifePrefab": {
       "__uuid__": "16f16cf4-2c86-4fb1-b350-7f407b939e4d",
       "__expectedType__": "cc.Prefab"
     },
-    "poolKnife": {
-      "__id__": 9
+    "amountPrefab": {
+      "__uuid__": "860bdd66-b0dc-406e-af82-c2192b7e8572",
+      "__expectedType__": "cc.Prefab"
+    },
+    "lbScore": {
+      "__id__": 15
+    },
+    "lbStage": {
+      "__id__": 28
+    },
+    "lbApple": {
+      "__id__": 19
+    },
+    "woodView": {
+      "__id__": 69
+    },
+    "audioController": {
+      "__id__": 73
     },
     "_id": "e1FlkSmZ9JobLfN3WtYihX"
+  },
+  {
+    "__type__": "c2facnElkhDZoLWKBqTF7KN",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 70
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "wood": {
+      "__id__": 53
+    },
+    "animWood": {
+      "__uuid__": "824750f7-32bd-4b39-be91-856bd8ccc3e9",
+      "__expectedType__": "cc.AnimationClip"
+    },
+    "_id": "24FKgyVSZMraTviEnEAUDW"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "@WoodView",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 71
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 72
+      },
+      {
+        "__id__": 69
+      }
+    ],
+    "_prefab": null,
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_mobility": 0,
+    "_layer": 1073741824,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": "b5YeQLgI9BUryKvy/hicNl"
   },
   {
     "__type__": "cc.Node",
@@ -2265,7 +2457,11 @@
     "_parent": {
       "__id__": 1
     },
-    "_children": [],
+    "_children": [
+      {
+        "__id__": 70
+      }
+    ],
     "_active": true,
     "_components": [],
     "_prefab": null,
@@ -2299,6 +2495,112 @@
     "_id": "68mKEvSR1FQbL7oLDzdNI3"
   },
   {
+    "__type__": "cc.UITransform",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 70
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 100,
+      "height": 100
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_id": "2djp/T6dRMRIFNIr8K/iJx"
+  },
+  {
+    "__type__": "8a124JiZ8pO4qQ/yxuh+V6d",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 74
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "audioHit": {
+      "__uuid__": "90e04ff2-517d-41fd-8669-41770be86cc2",
+      "__expectedType__": "cc.AudioClip"
+    },
+    "audioHitLast": {
+      "__uuid__": "f23bc365-4b1b-4222-8ae3-9c7432d97b14",
+      "__expectedType__": "cc.AudioClip"
+    },
+    "audioAppear": {
+      "__uuid__": "d6193f1c-0d98-443d-b5b5-a682a80b124d",
+      "__expectedType__": "cc.AudioClip"
+    },
+    "_id": "078UruuixK2ajKP3jcr09t"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "@AudioController",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 66
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 73
+      },
+      {
+        "__id__": 75
+      }
+    ],
+    "_prefab": null,
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_mobility": 0,
+    "_layer": 1073741824,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": "f5S+AwuPZIvIXntnjNCON9"
+  },
+  {
+    "__type__": "cc.AudioSource",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 74
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "_clip": null,
+    "_loop": false,
+    "_playOnAwake": true,
+    "_volume": 1,
+    "_id": "68nCnzg5hLtoFE8bAzvcMg"
+  },
+  {
     "__type__": "cc.Node",
     "_name": "@Modal",
     "_objFlags": 0,
@@ -2307,7 +2609,7 @@
     },
     "_children": [
       {
-        "__id__": 68
+        "__id__": 77
       }
     ],
     "_active": true,
@@ -2347,13 +2649,13 @@
     "_name": "GameModal",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 67
+      "__id__": 76
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 69
+        "__id__": 78
       }
     ],
     "_prefab": null,
@@ -2391,7 +2693,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 68
+      "__id__": 77
     },
     "_enabled": true,
     "__prefab": null,
@@ -2408,22 +2710,22 @@
   {
     "__type__": "cc.SceneGlobals",
     "ambient": {
-      "__id__": 72
+      "__id__": 81
     },
     "shadows": {
-      "__id__": 73
+      "__id__": 82
     },
     "_skybox": {
-      "__id__": 74
+      "__id__": 83
     },
     "fog": {
-      "__id__": 75
+      "__id__": 84
     },
     "octree": {
-      "__id__": 76
+      "__id__": 85
     },
     "lightProbeInfo": {
-      "__id__": 77
+      "__id__": 86
     },
     "bakedWithStationaryMainLight": false,
     "bakedWithHighpLightmap": false

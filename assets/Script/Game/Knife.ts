@@ -1,4 +1,6 @@
-import { _decorator, Collider2D, Component, Contact2DType, director, input, Input, Node, Sprite, tween, UITransform, Vec3 } from 'cc';
+import { _decorator, Collider2D, Component, Contact2DType,tween, Vec3 } from 'cc';
+import { Global } from '../Global';
+import { GAME_STATUS } from '../Enum';
 const { ccclass, requireComponent } = _decorator;
 
 @ccclass('Knife')
@@ -16,8 +18,7 @@ export class Knife extends Component {
         //Hanlde collider
         collider.on(Contact2DType.BEGIN_CONTACT, (self: Collider2D, other: Collider2D) => {
             if (other.tag == 2) {
-                console.log("Game over");
-                director.pause();
+                Global.status = GAME_STATUS.GAME_OVER;
             }
         }, this)
     }
