@@ -17,12 +17,51 @@ export const GAME_DATA = [
         type: 2
     },
     {
-        id: 4, 
-        knife: 6, 
+        id: 4,
+        knife: 6,
+        type: 3,
+    },
+    {
+        id: 5,
+        knife: 6,
+        type: 3,
+    },
+    {
+        id: 6,
+        knife: 6,
+        type: 3,
+    },
+    {
+        id: 7,
+        knife: 6,
+        type: 3,
+    },
+    {
+        id: 8,
+        knife: 6,
+        type: 3,
+    },
+    {
+        id: 9,
+        knife: 6,
+        type: 3,
+    },
+    {
+        id: 10,
+        knife: 6,
         type: 3,
     }
+    ,
+    {
+        id: 11,
+        knife: 6,
+        type: 3,
+    }
+
 ]
 
 export const GAME_COLOR = {
-    color_pass: new Color(31, 0, 0, 255)
+    color_pass: new Color(31, 0, 0, 255),
+    color_active_stage: new Color(255, 173, 0, 255),
+    color_default: new Color(255, 255, 255, 255)
 }

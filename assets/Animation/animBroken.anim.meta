@@ -2,12 +2,12 @@
   "ver": "2.0.3",
   "importer": "animation-clip",
   "imported": true,
-  "uuid": "f5287101-4cf2-4113-8f0d-66739b91db80",
+  "uuid": "8be99200-5417-466d-9b0e-83d6aa3b36f7",
   "files": [
     ".cconb"
   ],
   "subMetas": {},
   "userData": {
-    "name": "animation"
+    "name": "animBroken"
   }
 }

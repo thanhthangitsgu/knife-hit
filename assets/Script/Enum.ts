@@ -1,5 +1,3 @@
-import { AudioClip } from "cc"
-
 //Enum of project   
 export enum KNIFE_STATUS {
     INIT,
@@ -23,8 +21,8 @@ export enum AUDIO_TYPE {
     Hit,
     LastHit
 }
-
-export type MapType = {
-    [id: string]: any
+export enum SETTING_STATUS{
+    ON,
+    OFF
 }
 

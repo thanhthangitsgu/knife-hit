@@ -1,12 +1,13 @@
 import { Knife } from './Knife';
-import { _decorator, Collider2D, Component, Contact2DType, Input, input, instantiate, Node, Prefab, UITransform, sp, Vec3, Quat, math, Label, director } from 'cc';
+import { _decorator, Component, Input, input, instantiate, Node, Prefab, UITransform, Vec3, Label, director, find } from 'cc';
 import { WoodView } from './WoodView';
-import { AUDIO_TYPE, GAME_STATUS, KNIFE_STATUS, WOOD_ANIMATION } from '../Enum';
+import { AUDIO_TYPE, GAME_STATUS, KNIFE_STATUS, SETTING_STATUS, WOOD_ANIMATION } from '../Enum';
 import { Global } from '../Global';
 import { GAME_COLOR, GAME_DATA } from '../GameData';
 import { Sprite } from 'cc';
-import { Color } from 'cc';
 import { AudioController } from '../Audio/AudioController';
+import { StageView } from './StageView';
+import { Parameters } from '../Parameters';
 const { ccclass, property, requireComponent } = _decorator;
 
 @ccclass('GameController')
@@ -80,6 +81,11 @@ export class GameController extends Component {
     })
     private audioController: AudioController;
 
+    @property({
+        type: StageView,
+    })
+    private stageView: StageView;
+
     /** @_____VARIABLE_____ */
     private listKnife: Node[] = [];
 
@@ -90,6 +96,8 @@ export class GameController extends Component {
     private amount: number = 0;
 
     protected onLoad(): void {
+        this.settingSound();
+
         //Init game
         this.loadData();
     }
@@ -98,7 +106,7 @@ export class GameController extends Component {
         this.widthWood = this.woodSpr.getComponent(UITransform).width / 2 - 50;
     }
 
-    protected update(dt: number): void {
+    protected update(): void {
         switch (Global.status) {
             case GAME_STATUS.GAME_READY: {
                 this.loadData();
@@ -115,14 +123,36 @@ export class GameController extends Component {
         }
 
     }
+    /**Setting sound */
+    private settingSound(): void {
+        const node = find('Parameters');
+        const parameter = node ? node.getComponent(Parameters) : null;
+        if (parameter.getSoundStatus() === SETTING_STATUS.OFF) this.audioController.setVolume(0);
+    }
 
-    //**Load game data */
-    private loadData(): void {
-        if (Global.gameStage >= GAME_DATA.length) {
-            director.loadScene(Global.SCENE_NAME.Menu);
-            Global.gameStage = 1;
+    /**Setting view stage dot */
+    private settingStageDot(): void {
+        switch (Global.gameStage % 5) {
+            case 0:
+                this.stageView.activeStageBoss();
+                break;
+            case 1:
+                this.stageView.resetStage();
+                this.stageView.activeStage(Global.gameStage % 5);
+                break;
+            default:
+                this.stageView.activeStage(Global.gameStage % 5);
         }
-        //Load game data
+    }
+
+    /**Load game data */
+    private loadData(): void {
+        //If current stage is maximal then return menu
+        if (Global.gameStage > GAME_DATA.length) this.acquireMaxStage();
+
+        this.settingStageDot();
+
+        //Initialize values
         this.amount = GAME_DATA[Global.gameStage - 1].knife;
         this.lbStage.string = `STAGE ${Global.gameStage}`;
 
@@ -143,6 +173,7 @@ export class GameController extends Component {
         }
         Global.status = GAME_STATUS.GAME_PLAYING;
 
+        //Handle on event after load
         setTimeout(() => {
             input.on(Input.EventType.MOUSE_DOWN, this.onClick, this);
         }, 400);
@@ -167,7 +198,7 @@ export class GameController extends Component {
 
         //Increase score
         Global.score++;
-        this.lbScore.string = Global.score.toString();
+        this.lbScore.string = `${Global.score}`;
     }
 
     //Pass the stage
@@ -176,6 +207,14 @@ export class GameController extends Component {
         this.woodView.runAnimation(WOOD_ANIMATION.Appear);
         Global.gameStage++;
         Global.status = GAME_STATUS.GAME_READY;
+    }
+
+    //Acquire max stage
+    private acquireMaxStage(): void {
+        alert("Đã đạt vòng tối đa");
+        Global.gameStage = 1;
+        Global.status = GAME_STATUS.GAME_READY;
+        director.loadScene(Global.SCENE_NAME.Menu);
     }
 
     /**Convert @vector from @entry to @end  */
@@ -193,7 +232,7 @@ export class GameController extends Component {
         let pos = new Vec3(0, -this.wood.getComponent(UITransform).width / 2 + 50, 0);
         if (this.listKnife.length > 0) {
             this.listKnife[this.listKnife.length - 1].getComponent(Knife).move(this.convert(this.wood, this.poolKnife, new Vec3(this.listKnife[this.listKnife.length - 1].position.x, pos.y, 0)));
-            this.listKnife[this.listKnife.length - 1].getComponent(Knife).setAngle(-this.woodSpr.eulerAngles.z - 100);
+            this.listKnife[this.listKnife.length - 1].getComponent(Knife).setAngle(-this.woodSpr.eulerAngles.z - 105);
             this.woodView.runAnimation(WOOD_ANIMATION.Hit);
         }
         //Init 

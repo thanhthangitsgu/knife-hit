@@ -17,6 +17,8 @@ export class AudioController extends Component {
 
     private listAudio: Record<string, AudioClip> = {};
 
+    private volume: number = 1;
+
     protected onLoad(): void {
         this.audioSource = this.node.getComponent(AudioSource);
     }
@@ -29,7 +31,11 @@ export class AudioController extends Component {
     }
 
     public playAudio(AUDIO_TYPE) {
-        this.audioSource.playOneShot(this.listAudio[AUDIO_TYPE], 1);
+        this.audioSource.playOneShot(this.listAudio[AUDIO_TYPE], this.volume);
+    }
+
+    public setVolume(_volume: number): void {
+        this.volume = _volume
     }
 
 
