@@ -8,6 +8,7 @@ export enum KNIFE_STATUS {
 export enum GAME_STATUS {
     GAME_READY,
     GAME_PLAYING,
+    GAME_HIT,
     GAME_OVER,
 }
 
@@ -19,7 +20,8 @@ export enum WOOD_ANIMATION {
 export enum AUDIO_TYPE {
     Appear,
     Hit,
-    LastHit
+    LastHit,
+    Game_Over
 }
 export enum SETTING_STATUS{
     ON,

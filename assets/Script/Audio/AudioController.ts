@@ -15,6 +15,9 @@ export class AudioController extends Component {
     @property(AudioClip)
     private audioAppear: AudioClip | null = null;
 
+    @property(AudioClip)
+    private audioGameOver: AudioClip | null = null;
+
     private listAudio: Record<string, AudioClip> = {};
 
     private volume: number = 1;
@@ -28,9 +31,11 @@ export class AudioController extends Component {
         this.listAudio[AUDIO_TYPE.Appear] = this.audioAppear;
         this.listAudio[AUDIO_TYPE.Hit] = this.audioHit;
         this.listAudio[AUDIO_TYPE.LastHit] = this.audioHitLast;
+        this.listAudio[AUDIO_TYPE.Game_Over] = this.audioGameOver;
     }
 
     public playAudio(AUDIO_TYPE) {
+        this.audioSource.stop();
         this.audioSource.playOneShot(this.listAudio[AUDIO_TYPE], this.volume);
     }
 

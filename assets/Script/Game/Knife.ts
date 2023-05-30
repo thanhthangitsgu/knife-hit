@@ -1,23 +1,26 @@
-import { _decorator, Collider2D, Component, Contact2DType, tween, Vec3 } from 'cc';
+import { _decorator, Collider2D, Component, Contact2DType, IPhysics2DContact, RigidBody2D, Slider, Tween, tween, Vec2, Vec3 } from 'cc';
 import { Global } from '../Global';
-import { GAME_STATUS } from '../Enum';
-const { ccclass, requireComponent } = _decorator;
+import { AUDIO_TYPE, GAME_STATUS } from '../Enum';
+import { AudioController } from '../Audio/AudioController';
+const { ccclass, requireComponent, property } = _decorator;
 
 @ccclass('Knife')
 @requireComponent(Collider2D)
 export class Knife extends Component {
     private angle: number = 0;
 
+    private status = 0;
+
     protected onLoad(): void {
         tween(this.node).to(0.1, {
-            position: new Vec3(this.node.position.x, this.node.position.y + 100, 0)
+            position: new Vec3(0, this.node.position.y + 100, 0)
         }).start();
         //Get collider component
         const collider = this.node.getComponent(Collider2D);
 
         //Hanlde collider
-        collider.on(Contact2DType.BEGIN_CONTACT, (self: Collider2D, other: Collider2D) => {
-            Global.status = GAME_STATUS.GAME_OVER;
+        collider.on(Contact2DType.BEGIN_CONTACT, (self: Collider2D, other: Collider2D, contact: IPhysics2DContact) => {
+            if (other.tag === 1) Global.status = GAME_STATUS.GAME_HIT
         }, this)
     }
 
@@ -25,6 +28,7 @@ export class Knife extends Component {
         tween(this.node).to(0.05, {
             position: pos
         }).start();
+        this.status = 1;
     }
 
     public setAngle(_angle: number) {
@@ -35,6 +39,13 @@ export class Knife extends Component {
         return this.angle;
     }
 
+    public setStatus(_status: number) {
+        this.status = _status;
+    }
+
+    public getStatus(): number {
+        return this.status;
+    }
 
 
 

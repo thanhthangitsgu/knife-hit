@@ -2,12 +2,12 @@
   "ver": "1.1.43",
   "importer": "prefab",
   "imported": true,
-  "uuid": "238508c0-d7df-4702-a7a2-48259756c380",
+  "uuid": "f4f92392-6c5e-4178-9dff-c349b80e3e14",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "Apple"
+    "syncNodeName": "AppleScore"
   }
 }

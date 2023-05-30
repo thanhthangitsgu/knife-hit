@@ -1,5 +1,5 @@
 import { Parameters } from './../Parameters';
-import { _decorator, Button, Component, director, Node } from 'cc';
+import { _decorator, Button, Component, director, Label, Node } from 'cc';
 import { Global } from '../Global';
 const { ccclass, property } = _decorator;
 
@@ -35,6 +35,16 @@ export class MenuController extends Component {
     })
     private parameters: Node | null = null;
 
+    @property({
+        type: Label,
+    })
+    private labelScore: Label | null = null;
+
+    @property({
+        type: Label
+    })
+    private labelStage: Label | null = null;
+
     protected onLoad(): void {
         //Turn of boardsetting
         this.boardSetting.active = false;
@@ -51,6 +61,9 @@ export class MenuController extends Component {
         this.buttonHome.node.on(Button.EventType.CLICK, () => {
             this.boardSetting.active = false;
         })
+
+        this.labelScore.string = localStorage.getItem('knife_hit_highscore') ? `SCORE ${localStorage.getItem('knife_hit_highscore')}` : "";
+        this.labelStage.string = localStorage.getItem('knife_hit_highstage') ? `STAGE ${localStorage.getItem('knife_hit_highstage')}` : "";
     }
 
     protected start(): void {

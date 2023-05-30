@@ -8,7 +8,7 @@ export const GAME_DATA = [
     },
     {
         id: 2,
-        knife: 4,
+        knife: 5,
         type: 2,
     },
     {
@@ -28,33 +28,33 @@ export const GAME_DATA = [
     },
     {
         id: 6,
-        knife: 6,
+        knife: 7,
         type: 3,
     },
     {
         id: 7,
-        knife: 6,
+        knife: 7,
         type: 3,
     },
     {
         id: 8,
-        knife: 6,
+        knife: 8,
         type: 3,
     },
     {
         id: 9,
-        knife: 6,
+        knife: 10,
         type: 3,
     },
     {
         id: 10,
-        knife: 6,
+        knife: 9,
         type: 3,
     }
     ,
     {
         id: 11,
-        knife: 6,
+        knife: 11,
         type: 3,
     }
 

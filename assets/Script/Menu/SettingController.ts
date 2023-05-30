@@ -15,6 +15,13 @@ export class SettingController extends Component {
     })
     private buttonOffSound: Button | null = null;
 
+    @property({
+        type: Button,
+        tooltip: "Button clear data"
+    })
+
+    private buttonClear: Button | null = null;
+
     private soundStatus: SETTING_STATUS = SETTING_STATUS.ON;
 
     protected onLoad(): void {
@@ -40,6 +47,11 @@ export class SettingController extends Component {
             this.controlButton(this.buttonOffSound, this.buttonOnSound);
             parameter.setSoundStatus(SETTING_STATUS.ON);
         }, this)
+
+        this.buttonClear.node.on(Button.EventType.CLICK, () => {
+            localStorage.setItem('knife_hit_highscore', '0');
+            localStorage.setItem('knife_hit_highapple', '0');
+        })
     }
 
     //Turn on, turn off

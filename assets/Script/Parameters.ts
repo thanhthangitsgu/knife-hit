@@ -6,6 +6,10 @@ const { ccclass, property } = _decorator;
 export class Parameters extends Component {
     private soundStatus: SETTING_STATUS = SETTING_STATUS.ON;
 
+    public tempScore: number = 0;
+
+    public tempStage: number = 0;
+
     protected onLoad(): void {
         director.addPersistRootNode(this.node);
     }
