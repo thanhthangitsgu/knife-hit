@@ -325,6 +325,7 @@ export class GameController extends Component {
         }
         //Init 
         let element = instantiate(this.knifePrefab);
+        element.getComponent(Sprite).spriteFrame = Global.sprKnife;
         this.poolKnife.addChild(element);
         this.listKnife.push(element);
     }

@@ -45,6 +45,16 @@ export class MenuController extends Component {
     })
     private labelStage: Label | null = null;
 
+    @property({
+        type: Node,
+    })
+    private knifeSetting: Node;
+
+    @property({
+        type: Button
+    })
+    private buttonKnife: Button;
+
     protected onLoad(): void {
         //Turn of boardsetting
         this.boardSetting.active = false;
@@ -60,6 +70,14 @@ export class MenuController extends Component {
 
         this.buttonHome.node.on(Button.EventType.CLICK, () => {
             this.boardSetting.active = false;
+        })
+
+        this.buttonHome.node.on(Button.EventType.CLICK, () => {
+            this.knifeSetting.active = false;
+        })
+
+        this.buttonKnife.node.on(Button.EventType.CLICK, () => {
+            this.knifeSetting.active = true;
         })
 
         this.labelScore.string = localStorage.getItem('knife_hit_highscore') ? `SCORE ${localStorage.getItem('knife_hit_highscore')}` : "";

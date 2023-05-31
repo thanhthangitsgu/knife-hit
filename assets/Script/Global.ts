@@ -1,4 +1,4 @@
-import { _decorator, Component } from 'cc';
+import { _decorator, Component, SpriteFrame } from 'cc';
 import { GAME_STATUS } from './Enum';
 const { ccclass, property } = _decorator;
 
@@ -21,6 +21,8 @@ export class Global extends Component {
         Game: "Game", 
         End: "End"
     }
+    //Sprite knife
+    public static sprKnife: SpriteFrame;
     
 
 }

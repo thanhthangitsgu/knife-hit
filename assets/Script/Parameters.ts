@@ -1,4 +1,4 @@
-import { _decorator, Component, director, Node } from 'cc';
+import { _decorator, Component, director, Node, SpriteFrame } from 'cc';
 import { SETTING_STATUS } from './Enum';
 const { ccclass, property } = _decorator;
 
@@ -9,6 +9,8 @@ export class Parameters extends Component {
     public tempScore: number = 0;
 
     public tempStage: number = 0;
+
+    public sprKnife: SpriteFrame;
 
     protected onLoad(): void {
         director.addPersistRootNode(this.node);
