@@ -58,6 +58,7 @@ export class MenuController extends Component {
     protected onLoad(): void {
         //Turn of boardsetting
         this.boardSetting.active = false;
+        this.knifeSetting.active = false;
 
         //Add parameters
         this.btPlay.node.on(Button.EventType.CLICK, () => {

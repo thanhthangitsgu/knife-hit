@@ -80,6 +80,8 @@ export class KnifeOptions extends Component {
         this.btnHome.node.on(Button.EventType.CLICK, () => {
             this.knifeSetting.active = false;
         })
+
+        Global.sprKnife = this.knifeFifth;
     }
 
     protected start(): void {
