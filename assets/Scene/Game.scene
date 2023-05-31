@@ -21,22 +21,22 @@
         "__id__": 3
       },
       {
+        "__id__": 69
+      },
+      {
         "__id__": 70
       },
       {
-        "__id__": 71
+        "__id__": 75
       },
       {
-        "__id__": 76
-      },
-      {
-        "__id__": 84
+        "__id__": 83
       }
     ],
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 87
+      "__id__": 86
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -67,7 +67,7 @@
     },
     "autoReleaseAssets": false,
     "_globals": {
-      "__id__": 90
+      "__id__": 89
     },
     "_id": "a1bc5511-2272-446a-ab80-dab904099cc7"
   },
@@ -147,22 +147,22 @@
         "__id__": 54
       },
       {
-        "__id__": 62
+        "__id__": 61
       },
       {
-        "__id__": 65
+        "__id__": 64
       }
     ],
     "_active": true,
     "_components": [
       {
+        "__id__": 66
+      },
+      {
         "__id__": 67
       },
       {
         "__id__": 68
-      },
-      {
-        "__id__": 69
       }
     ],
     "_prefab": null,
@@ -1712,10 +1712,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 60
+        "__id__": 59
       },
       {
-        "__id__": 61
+        "__id__": 60
       }
     ],
     "_prefab": null,
@@ -1766,9 +1766,6 @@
       },
       {
         "__id__": 58
-      },
-      {
-        "__id__": 59
       }
     ],
     "_prefab": null,
@@ -1861,19 +1858,6 @@
     "_id": "720rxbv25L8LjNXHDbRS3m"
   },
   {
-    "__type__": "c2facnElkhDZoLWKBqTF7KN",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 55
-    },
-    "_enabled": true,
-    "__prefab": null,
-    "wood": null,
-    "animWood": null,
-    "_id": "52As83S9pH8I/ppK7CaX9b"
-  },
-  {
     "__type__": "cc.Animation",
     "_name": "",
     "_objFlags": 0,
@@ -1957,10 +1941,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 63
+        "__id__": 62
       },
       {
-        "__id__": 64
+        "__id__": 63
       }
     ],
     "_prefab": null,
@@ -1998,7 +1982,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 62
+      "__id__": 61
     },
     "_enabled": true,
     "__prefab": null,
@@ -2019,7 +2003,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 62
+      "__id__": 61
     },
     "_enabled": true,
     "__prefab": null,
@@ -2056,7 +2040,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 66
+        "__id__": 65
       }
     ],
     "_prefab": null,
@@ -2094,7 +2078,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 65
+      "__id__": 64
     },
     "_enabled": true,
     "__prefab": null,
@@ -2224,10 +2208,10 @@
     },
     "_children": [
       {
-        "__id__": 72
+        "__id__": 71
       },
       {
-        "__id__": 81
+        "__id__": 80
       }
     ],
     "_active": true,
@@ -2267,16 +2251,16 @@
     "_name": "@GameController",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 71
+      "__id__": 70
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 73
+        "__id__": 72
       },
       {
-        "__id__": 83
+        "__id__": 82
       }
     ],
     "_prefab": null,
@@ -2314,7 +2298,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 72
+      "__id__": 71
     },
     "_enabled": true,
     "__prefab": null,
@@ -2328,10 +2312,10 @@
       "__id__": 9
     },
     "knifeContainer": {
-      "__id__": 62
+      "__id__": 61
     },
     "appleContainer": {
-      "__id__": 65
+      "__id__": 64
     },
     "knifePrefab": {
       "__uuid__": "16f16cf4-2c86-4fb1-b350-7f407b939e4d",
@@ -2353,13 +2337,13 @@
     },
     "lbApple": null,
     "woodView": {
-      "__id__": 74
+      "__id__": 73
     },
     "audioController": {
-      "__id__": 80
+      "__id__": 79
     },
     "stageView": {
-      "__id__": 78
+      "__id__": 77
     },
     "_id": "e1FlkSmZ9JobLfN3WtYihX"
   },
@@ -2368,16 +2352,32 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 75
+      "__id__": 74
     },
     "_enabled": true,
     "__prefab": null,
     "wood": {
       "__id__": 55
     },
-    "animWood": {
-      "__uuid__": "824750f7-32bd-4b39-be91-856bd8ccc3e9",
-      "__expectedType__": "cc.AnimationClip"
+    "sprDefault": {
+      "__uuid__": "966a400f-5b3e-4b57-8758-a83c0ae372ed@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "sprBossStage10": {
+      "__uuid__": "5d160e1b-fd8f-4571-a9a3-e3ee44d69518@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "sprBossStage5": {
+      "__uuid__": "c5893c3e-7bbe-43b7-b667-f6b5fd9e6ebc@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "sprBossStage15": {
+      "__uuid__": "a0a1e1db-31bd-47c1-8301-4870562ec75d@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "sprBossStage20": {
+      "__uuid__": "d363b559-f739-43da-8d4f-18e9004a3b00@f9941",
+      "__expectedType__": "cc.SpriteFrame"
     },
     "_id": "24FKgyVSZMraTviEnEAUDW"
   },
@@ -2386,16 +2386,16 @@
     "_name": "@WoodView",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 76
+      "__id__": 75
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 79
+        "__id__": 78
       },
       {
-        "__id__": 74
+        "__id__": 73
       }
     ],
     "_prefab": null,
@@ -2437,10 +2437,10 @@
     },
     "_children": [
       {
-        "__id__": 75
+        "__id__": 74
       },
       {
-        "__id__": 77
+        "__id__": 76
       }
     ],
     "_active": true,
@@ -2480,13 +2480,13 @@
     "_name": "@StageView",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 76
+      "__id__": 75
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 78
+        "__id__": 77
       }
     ],
     "_prefab": null,
@@ -2524,7 +2524,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 77
+      "__id__": 76
     },
     "_enabled": true,
     "__prefab": null,
@@ -2553,7 +2553,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 75
+      "__id__": 74
     },
     "_enabled": true,
     "__prefab": null,
@@ -2574,7 +2574,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 81
+      "__id__": 80
     },
     "_enabled": true,
     "__prefab": null,
@@ -2601,16 +2601,16 @@
     "_name": "@AudioController",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 71
+      "__id__": 70
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 80
+        "__id__": 79
       },
       {
-        "__id__": 82
+        "__id__": 81
       }
     ],
     "_prefab": null,
@@ -2648,7 +2648,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 81
+      "__id__": 80
     },
     "_enabled": true,
     "__prefab": null,
@@ -2663,7 +2663,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 72
+      "__id__": 71
     },
     "_enabled": true,
     "__prefab": null,
@@ -2688,7 +2688,7 @@
     },
     "_children": [
       {
-        "__id__": 85
+        "__id__": 84
       }
     ],
     "_active": true,
@@ -2728,13 +2728,13 @@
     "_name": "GameModal",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 84
+      "__id__": 83
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 86
+        "__id__": 85
       }
     ],
     "_prefab": null,
@@ -2772,7 +2772,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 85
+      "__id__": 84
     },
     "_enabled": true,
     "__prefab": null,
@@ -2786,7 +2786,7 @@
     "instance": null,
     "targetOverrides": [
       {
-        "__id__": 88
+        "__id__": 87
       }
     ],
     "nestedPrefabInstanceRoots": [
@@ -2798,7 +2798,7 @@
   {
     "__type__": "cc.TargetOverrideInfo",
     "source": {
-      "__id__": 73
+      "__id__": 72
     },
     "sourceInfo": null,
     "propertyPath": [
@@ -2808,7 +2808,7 @@
       "__id__": 13
     },
     "targetInfo": {
-      "__id__": 89
+      "__id__": 88
     }
   },
   {
@@ -2820,22 +2820,22 @@
   {
     "__type__": "cc.SceneGlobals",
     "ambient": {
-      "__id__": 91
+      "__id__": 90
     },
     "shadows": {
-      "__id__": 92
+      "__id__": 91
     },
     "_skybox": {
-      "__id__": 93
+      "__id__": 92
     },
     "fog": {
-      "__id__": 94
+      "__id__": 93
     },
     "octree": {
-      "__id__": 95
+      "__id__": 94
     },
     "lightProbeInfo": {
-      "__id__": 96
+      "__id__": 95
     },
     "bakedWithStationaryMainLight": false,
     "bakedWithHighpLightmap": false

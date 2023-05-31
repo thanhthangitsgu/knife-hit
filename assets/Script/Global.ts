@@ -21,5 +21,6 @@ export class Global extends Component {
         Game: "Game", 
         End: "End"
     }
+    
 
 }

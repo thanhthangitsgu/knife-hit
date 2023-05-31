@@ -1,7 +1,7 @@
 import { Knife } from './Knife';
 import { _decorator, Component, Input, input, instantiate, Node, Prefab, UITransform, Vec3, Label, director, find, RigidBody2D, Vec2, math, Collider2D, Contact2DType, IPhysics2DContact } from 'cc';
 import { WoodView } from './WoodView';
-import { AUDIO_TYPE, GAME_STATUS, SETTING_STATUS, WOOD_ANIMATION } from '../Enum';
+import { AUDIO_TYPE, GAME_STATUS, SETTING_STATUS, WOOD_ANIMATION, WOOD_SPRITE, WOOD_TYPE } from '../Enum';
 import { Global } from '../Global';
 import { GAME_COLOR, GAME_DATA } from '../GameData';
 import { Sprite } from 'cc';
@@ -86,7 +86,7 @@ export class GameController extends Component {
     @property({
         type: WoodView
     })
-    private woodView: WoodView;
+    private woodView: WoodView | null = null;
 
     @property({
         type: AudioController,
@@ -232,12 +232,20 @@ export class GameController extends Component {
         //Initialize values
         this.amount = GAME_DATA[Global.gameStage - 1].knife;
         this.lbStage.string = `STAGE ${Global.gameStage}`;
+        if (Global.gameStage % 5 === 0) {
+            this.woodView.setSprite(GAME_DATA[Global.gameStage - 1].sprite);
+        } else {
+            this.woodView.setSprite(WOOD_SPRITE.DEFAULT);
+        }
+        this.woodView.setTypeSpeed(GAME_DATA[Global.gameStage - 1].speed);
+        this.woodView.setTypeWood(GAME_DATA[Global.gameStage - 1].type);
 
         this.knifeContainer.removeAllChildren();
         this.listAmount = [];
 
         this.poolKnife.removeAllChildren();
         this.listKnife = [];
+
 
         this.generateKnife();
         this.managerApple();
@@ -313,8 +321,7 @@ export class GameController extends Component {
         if (this.listKnife.length > 0) {
             const lastKnife = this.listKnife[this.listKnife.length - 1].getComponent(Knife);
             lastKnife.move(this.convert(this.wood, this.poolKnife, new Vec3(lastKnife.node.position.x, pos.y, 0)));
-            lastKnife.setAngle(-this.woodSpr.eulerAngles.z - 94.5);
-            this.woodView.runAnimation(WOOD_ANIMATION.Hit);
+            lastKnife.setAngle(-this.woodSpr.eulerAngles.z - 90)
         }
         //Init 
         let element = instantiate(this.knifePrefab);

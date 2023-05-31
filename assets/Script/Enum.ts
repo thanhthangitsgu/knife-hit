@@ -23,8 +23,21 @@ export enum AUDIO_TYPE {
     LastHit,
     Game_Over
 }
-export enum SETTING_STATUS{
+export enum SETTING_STATUS {
     ON,
     OFF
+}
+
+export enum WOOD_TYPE {
+    ONE,
+    TWO
+}
+
+export enum WOOD_SPRITE {
+    DEFAULT,
+    ST5,
+    ST10,
+    ST15,
+    ST20,
 }
 

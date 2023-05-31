@@ -33,7 +33,7 @@
         "__id__": 109
       },
       {
-        "__id__": 114
+        "__id__": 112
       },
       {
         "__id__": 105
@@ -42,7 +42,7 @@
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 115
+      "__id__": 113
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -73,7 +73,7 @@
     },
     "autoReleaseAssets": false,
     "_globals": {
-      "__id__": 116
+      "__id__": 114
     },
     "_id": "e01d14f8-4d8f-4eb2-b28a-8ef5e25d8858"
   },
@@ -3467,7 +3467,7 @@
   {
     "__type__": "cc.Node",
     "_name": "@Controller",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 1
     },
@@ -3514,7 +3514,7 @@
   {
     "__type__": "cc.Node",
     "_name": "@MenuController",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 102
     },
@@ -3645,7 +3645,7 @@
   {
     "__type__": "cc.Node",
     "_name": "@SettingController",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 102
     },
@@ -3716,9 +3716,6 @@
     "_children": [
       {
         "__id__": 110
-      },
-      {
-        "__id__": 112
       }
     ],
     "_active": true,
@@ -3755,7 +3752,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "LogoView",
+    "_name": "KnifeOptions",
     "_objFlags": 0,
     "_parent": {
       "__id__": 109
@@ -3795,63 +3792,6 @@
       "y": 0,
       "z": 0
     },
-    "_id": "63zv8KIK5BIZwKe33hHOOk"
-  },
-  {
-    "__type__": "40411s+n95OOb/MpbYRJQlO",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 110
-    },
-    "_enabled": false,
-    "__prefab": null,
-    "bottomLogo": null,
-    "topLogo": null,
-    "_id": "4eMVUvJL5MVI5JhxRxQk5E"
-  },
-  {
-    "__type__": "cc.Node",
-    "_name": "KnifeOptions",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 109
-    },
-    "_children": [],
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 113
-      }
-    ],
-    "_prefab": null,
-    "_lpos": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_lrot": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": 0,
-      "w": 1
-    },
-    "_lscale": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_mobility": 0,
-    "_layer": 1073741824,
-    "_euler": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
     "_id": "c8xvOzVzNHtJCLVTI1GjXA"
   },
   {
@@ -3859,11 +3799,14 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 112
+      "__id__": 110
     },
     "_enabled": true,
     "__prefab": null,
-    "knifeFirsth": null,
+    "knifeFirsth": {
+      "__uuid__": "d72c1f9a-a8bc-4719-996e-99aa5a8ac8fa@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "knifeSecond": {
       "__uuid__": "4b111cde-1c4e-467a-82d9-165f8e253c84@f9941",
       "__expectedType__": "cc.SpriteFrame"
@@ -3896,7 +3839,10 @@
       "__uuid__": "72eba3ff-95b4-4cab-9fc9-98217c07d61a@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
-    "knifeTenth": null,
+    "knifeTenth": {
+      "__uuid__": "a7e6f6a8-b836-4880-9a83-3aa9faf0a974@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
     "_id": "1a38zjsdZHx7UxoGTbgDZ2"
   },
   {
@@ -3955,22 +3901,22 @@
   {
     "__type__": "cc.SceneGlobals",
     "ambient": {
-      "__id__": 117
+      "__id__": 115
     },
     "shadows": {
-      "__id__": 118
+      "__id__": 116
     },
     "_skybox": {
-      "__id__": 119
+      "__id__": 117
     },
     "fog": {
-      "__id__": 120
+      "__id__": 118
     },
     "octree": {
-      "__id__": 121
+      "__id__": 119
     },
     "lightProbeInfo": {
-      "__id__": 122
+      "__id__": 120
     },
     "bakedWithStationaryMainLight": false,
     "bakedWithHighpLightmap": false
