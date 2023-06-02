@@ -54,6 +54,7 @@ export class EndController extends Component {
         this.labelScore.string = `${Global.score}`;
         this.labelState.string = `STAGE ${Global.gameStage}`
 
+
         Global.status = GAME_STATUS.GAME_READY;
 
         let _appleScore = localStorage.getItem('knife_hit_highapple') ? Number(localStorage.getItem('knife_hit_highapple')) : 0;
@@ -68,8 +69,10 @@ export class EndController extends Component {
     }
 
     protected start(): void {
-        Global.score = 0;
-        Global.gameStage = 1;
+        setTimeout(() => {
+            Global.score = 0;
+            Global.gameStage = 1;
+        }, 1000);
     }
 }
 

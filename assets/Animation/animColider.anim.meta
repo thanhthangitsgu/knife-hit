@@ -2,12 +2,12 @@
   "ver": "2.0.3",
   "importer": "animation-clip",
   "imported": true,
-  "uuid": "af497bbb-ac7e-4ebe-acaf-a6f53e2dca43",
+  "uuid": "8be99200-5417-466d-9b0e-83d6aa3b36f7",
   "files": [
     ".cconb"
   ],
   "subMetas": {},
   "userData": {
-    "name": "animColide"
+    "name": "animColider"
   }
 }

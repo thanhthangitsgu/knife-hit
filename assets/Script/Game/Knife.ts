@@ -1,40 +1,69 @@
-import { _decorator, Collider2D, Component, Contact2DType, IPhysics2DContact, RigidBody2D, Slider, Tween, tween, Vec2, Vec3 } from 'cc';
+import { _decorator, Animation, Collider2D, Component, Contact2DType, director, Input, input, IPhysics2DContact, RigidBody2D, Slider, Tween, tween, Vec2, Vec3 } from 'cc';
 import { Global } from '../Global';
-import { AUDIO_TYPE, GAME_STATUS } from '../Enum';
-import { AudioController } from '../Audio/AudioController';
+import { GAME_STATUS } from '../Enum';
 const { ccclass, requireComponent, property } = _decorator;
 
 @ccclass('Knife')
 @requireComponent(Collider2D)
 export class Knife extends Component {
+
+    public speed = 0;
+
+    public stop: number = 0;
+
     private angle: number = 0;
 
+    /** value: 
+     * 
+     */
     private status = 0;
 
     private startPos: number;
 
+    private anim: Animation;
+
     protected onLoad(): void {
-        this.startPos = this.node.position.y;
-        tween(this.node).to(0.1, {
-            position: new Vec3(0, this.node.position.y + 100, 0)
+        tween(this.node).to(1 / 10000, {
+            position: new Vec3(0, this.node.position.y + 200, 0)
+        }).call(() => {
+            // input.on(Input.EventType.MOUSE_DOWN, () => {
+            //     this.speed = 9000;
+            // }, this)
         }).start();
+
+        this.anim = this.node.getComponent(Animation);
+
+        console.log(this.anim);
+    }
+
+    protected start(): void {
         //Get collider component
         const collider = this.node.getComponent(Collider2D);
+        const anim = this.node.getComponent(Animation);
+        // anim.play('animKnifeColide');
 
         //Hanlde collider
-        collider.on(Contact2DType.BEGIN_CONTACT, (self: Collider2D, other: Collider2D, contact: IPhysics2DContact) => {
-            if (other.tag === 1 && this.status) Global.status = GAME_STATUS.GAME_HIT
+        collider.on(Contact2DType.BEGIN_CONTACT, (self: Collider2D, other: Collider2D) => {
+            if (other.tag === 1 && this.status === 1) {
+                Global.status = GAME_STATUS.GAME_HIT;
+                input.off(Input.EventType.MOUSE_DOWN);
+                this.speed = 0;
+                this.status = 2;
+            }
         }, this)
     }
 
-    public move(pos: Vec3) {
-        tween(this.node).to(0.05, {
-            position: pos
-        }).start();
-
-        setTimeout(() => {
+    protected update(dt: number): void {
+        if (this.status === 0 && this.node.worldPosition.y >= this.stop) {
+            this.speed = 0;
             this.status = 1;
-        }, 85);
+        }
+        this.node.setPosition(this.node.position.x, this.node.position.y + this.speed * dt, this.node.position.z);
+
+    }
+
+    private setPosAndRot(dt: number): void {
+        this.node.setPosition(this.node.position.x, this.node.position.y - 1000 * dt, this.node.position.z);
     }
 
     public setAngle(_angle: number) {
@@ -53,8 +82,9 @@ export class Knife extends Component {
         return this.status;
     }
 
-
-
+    public runAnim(): void {
+        this.anim.play('animKnifeColide');
+    }
 
 }
 

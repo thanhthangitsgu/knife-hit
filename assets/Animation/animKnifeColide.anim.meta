@@ -2,12 +2,12 @@
   "ver": "2.0.3",
   "importer": "animation-clip",
   "imported": true,
-  "uuid": "04e5691c-e762-435a-b966-fabdcee4bfdf",
+  "uuid": "7b0b1823-8c09-41aa-8ef2-aed533b9ae23",
   "files": [
     ".cconb"
   ],
   "subMetas": {},
   "userData": {
-    "name": "animBroken"
+    "name": "animKnifeColide"
   }
 }

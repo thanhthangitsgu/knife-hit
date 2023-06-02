@@ -8,7 +8,6 @@ export class Apple extends Component {
 
     private angle: number = 0;
 
-
     protected onLoad(): void {
         this.angle = math.randomRangeInt(0, 360);
     }

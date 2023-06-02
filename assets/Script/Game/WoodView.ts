@@ -1,5 +1,5 @@
 import { WOOD_ANIMATION, WOOD_SPRITE, WOOD_TYPE } from './../Enum';
-import { _decorator, Component, math, Node, Quat, UITransform, Asset, Vec2, sp, Vec3, Animation, AnimationClip, Sprite, SpriteFrame, resources } from 'cc';
+import { _decorator, Component, math, Node, Quat, UITransform, Asset, Vec2, sp, Vec3, Animation, AnimationClip, Sprite, SpriteFrame, resources, Graphics, Color, js } from 'cc';
 const { ccclass, property, requireComponent } = _decorator;
 const { spine } = sp;
 const { MathUtils } = spine;
@@ -11,6 +11,11 @@ export class WoodView extends Component {
         type: Node,
     })
     private wood: Node;
+
+    @property({
+        type: Node
+    })
+    private woodContainer: Node; 
 
     private speed: number = 200;
 
@@ -54,6 +59,8 @@ export class WoodView extends Component {
 
     protected onLoad(): void {
         this.animation = this.wood.getComponent(Animation);
+
+        this.animation.play('animWood');
     }
 
     protected update(dt: number): void {
@@ -80,9 +87,13 @@ export class WoodView extends Component {
                 this.animation.play('animWood');
                 break;
             case WOOD_ANIMATION.Hit:
-                this.animation.play('animColide');
+                this.animation.play('animColider');
                 break;
         }
+    }
+
+    public setStaticSpeed(_speed): void {
+        this.speed = _speed;
     }
 
     public setSpeed(): void {
@@ -116,5 +127,26 @@ export class WoodView extends Component {
                 break;
         }
     }
+
+    public moveObject(node: Node, delta: number = 0, angle: number = 0, dirAngle: number): void {
+        let widthWood = this.wood.getComponent(UITransform).width / 2 - delta;
+        let nodeAngle = 3.14 * (this.wood.eulerAngles.z + angle) / 180;
+
+        let position = new Vec3(widthWood * Math.cos(nodeAngle), widthWood * Math.sin(nodeAngle), 0);
+        node.setPosition(this.convert(this.woodContainer, node.parent, position));
+        node.setRotationFromEuler(new Vec3(0, 0, this.wood.eulerAngles.z + dirAngle + angle))
+    }
+
+    private convert(entry: Node, end: Node, vector: Vec3): Vec3 {
+        const entryUI = entry.getComponent(UITransform);
+        const endUI = end.getComponent(UITransform);
+
+        let worldPos = entryUI.convertToWorldSpaceAR(vector);
+        return endUI.convertToNodeSpaceAR(worldPos);
+    }
+
+
 }
+
+
 

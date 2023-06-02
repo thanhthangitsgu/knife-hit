@@ -9,6 +9,7 @@ import { AudioController } from '../Audio/AudioController';
 import { StageView } from './StageView';
 import { Parameters } from '../Parameters';
 import { Apple } from './Apple';
+import { BrokenController } from './BrokenController';
 const { ccclass, property, requireComponent } = _decorator;
 
 @ccclass('GameController')
@@ -98,6 +99,12 @@ export class GameController extends Component {
     })
     private stageView: StageView;
 
+    @property({
+        type: BrokenController,
+        tooltip: "Broken"
+    })
+    private brokenController: BrokenController;
+
 
     /** @_____VARIABLE_____ */
     private listKnife: Node[] = [];
@@ -125,7 +132,7 @@ export class GameController extends Component {
         this.loadData();
     }
 
-    protected update(): void {
+    protected update(dt: number): void {
         switch (Global.status) {
             case GAME_STATUS.GAME_READY: {
                 this.loadData();
@@ -137,16 +144,63 @@ export class GameController extends Component {
                 break;
             }
             case GAME_STATUS.GAME_HIT: {
+                this.listKnife[this.listKnife.length - 2].getComponent(Knife).runAnim();
                 this.hitKnife();
                 break;
             }
             case GAME_STATUS.GAME_OVER: {
+                this.listKnife[this.listKnife.length - 2].setPosition(this.listKnife[this.listKnife.length - 2].position.x, this.listKnife[this.listKnife.length - 2].position.y - 1000 * dt, 0);
                 this.gameOver();
                 break;
             }
         }
 
     }
+
+    /**Load game data */
+    private loadData(): void {
+        //Turn off event on click
+        input.off(Input.EventType.MOUSE_DOWN);
+
+        //If current stage is maximal then return menu
+        if (Global.gameStage > GAME_DATA.length) this.acquireMaxStage();
+
+        /**Initialize values */
+        //Amount container: 
+        this.amount = GAME_DATA[Global.gameStage - 1].knife;
+
+        //Label show stage
+        this.lbStage.string = `STAGE ${Global.gameStage}`;
+
+        //Set wood
+        this.woodView.setSprite(Global.gameStage % 5 === 0 ? GAME_DATA[Global.gameStage - 1].sprite : WOOD_SPRITE.DEFAULT);
+        this.woodView.setTypeSpeed(GAME_DATA[Global.gameStage - 1].speed);
+        this.woodView.setTypeWood(GAME_DATA[Global.gameStage - 1].type);
+
+        //Setting UI of dot
+        this.settingStageDot();
+
+        //Init knife container
+        this.initializeKnifeContainer(this.amount);
+
+        //Init apple
+        this.generateApple();
+
+        //Empty pool knife and create the first knife
+        this.poolKnife.removeAllChildren();
+        this.listKnife = new Array();
+        this.generateKnife();
+
+        //Set game status
+        Global.status = GAME_STATUS.GAME_PLAYING;
+
+        // //Handle on event after load
+        setTimeout(() => {
+            input.on(Input.EventType.MOUSE_DOWN, this.onClick, this);
+        }, 500);
+
+    }
+
     /**Game over */
     private gameOver(): void {
         let highApple: number | null = Number(localStorage.getItem('knife_hit_highapple')) ? Number(localStorage.getItem('knife_hit_highapple')) : 0;
@@ -162,7 +216,9 @@ export class GameController extends Component {
         parameter.tempScore = Global.score;
         parameter.tempStage = Global.gameStage;
 
-        director.loadScene(Global.SCENE_NAME.End);
+        setTimeout(() => {
+            director.loadScene(Global.SCENE_NAME.End);
+        }, 800);
 
     }
     /**Setting sound */
@@ -189,13 +245,25 @@ export class GameController extends Component {
     /**Setting animation hit */
     private hitKnife(): void {
         this.amount = 1;
-        input.off(Input.EventType.MOUSE_DOWN);
+        this.woodView.setStaticSpeed(0);
         this.audioController.playAudio(AUDIO_TYPE.Game_Over);
         Global.status = GAME_STATUS.GAME_OVER;
     }
 
+    /**Control knife container */
+    private initializeKnifeContainer(amount): void {
+        this.knifeContainer.removeAllChildren();
+        this.listAmount = [];
+
+        for (let i = 0; i < amount; i++) {
+            let element = instantiate(this.amountPrefab);
+            this.knifeContainer.addChild(element);
+            this.listAmount.push(element);
+        }
+    }
+
     /**Manager apple */
-    private managerApple(): void {
+    private generateApple(): void {
         this.appleContainer.removeAllChildren();
         this.listApple = [];
         let number = math.randomRangeInt(0, 5);
@@ -211,81 +279,36 @@ export class GameController extends Component {
             const collider = apple.getComponent(Collider2D);
 
             //Hanlde collider
-            collider.on(Contact2DType.BEGIN_CONTACT, (self: Collider2D, other: Collider2D, contact: IPhysics2DContact) => {
+            collider.on(Contact2DType.BEGIN_CONTACT, (self: Collider2D, other: Collider2D) => {
                 if (other.tag !== 1) return;
                 else {
-                    this.appleScore++;
-                    this.lbApple.string = `${this.appleScore}`;
+                    this.lbApple.string = `${++this.appleScore}`;
                     self.node.active = false;
                 }
             }, this)
         })
     }
 
-    /**Load game data */
-    private loadData(): void {
-        //If current stage is maximal then return menu
-        if (Global.gameStage > GAME_DATA.length) this.acquireMaxStage();
-
-        this.settingStageDot();
-
-        //Initialize values
-        this.amount = GAME_DATA[Global.gameStage - 1].knife;
-        this.lbStage.string = `STAGE ${Global.gameStage}`;
-        if (Global.gameStage % 5 === 0) {
-            this.woodView.setSprite(GAME_DATA[Global.gameStage - 1].sprite);
-        } else {
-            this.woodView.setSprite(WOOD_SPRITE.DEFAULT);
-        }
-        this.woodView.setTypeSpeed(GAME_DATA[Global.gameStage - 1].speed);
-        this.woodView.setTypeWood(GAME_DATA[Global.gameStage - 1].type);
-
-        this.knifeContainer.removeAllChildren();
-        this.listAmount = [];
-
-        this.poolKnife.removeAllChildren();
-        this.listKnife = [];
-
-
-        this.generateKnife();
-        this.managerApple();
-
-        //Load knife container
-        for (let i = 0; i < this.amount; i++) {
-            let element = instantiate(this.amountPrefab);
-            this.knifeContainer.addChild(element);
-            this.listAmount.push(element);
-        }
-        Global.status = GAME_STATUS.GAME_PLAYING;
-
-        //Handle on event after load
-        setTimeout(() => {
-            input.on(Input.EventType.MOUSE_DOWN, () => {
-                if (Global.status === GAME_STATUS.GAME_HIT) {
-                    return;
-                } else {
-                    this.onClick();
-                }
-            }, this);
-        }, 400);
-    }
-
     //Handle on click
     private onClick() {
-        //Create knife
+        //Push the last knife
+        const lastKnife = this.listKnife[this.listKnife.length - 1].getComponent(Knife);
+        lastKnife.setAngle(- this.woodSpr.eulerAngles.z - 95);
+        lastKnife.speed = 9000;
+
+        //Create new knife
         this.generateKnife();
+
         this.audioController.playAudio(AUDIO_TYPE.Hit);
+        this.woodView.runAnimation(WOOD_ANIMATION.Hit);
 
         //Mark the passed 
         this.listAmount[this.amount - 1].getComponent(Sprite).color = GAME_COLOR.color_pass;
         this.amount--;
-        if (this.amount <= 0 && Global.status !== GAME_STATUS.GAME_HIT) {
-            this.audioController.playAudio(AUDIO_TYPE.LastHit);
-            input.off(Input.EventType.MOUSE_DOWN);
-            setTimeout(() => {
-                this.passStage();
-            }, 500);
-        }
+
+        setTimeout(() => {
+            if (this.amount <= 0 && Global.status !== GAME_STATUS.GAME_HIT) this.passStage();
+        }, 100);
 
         //Increase score
         Global.score++;
@@ -294,8 +317,19 @@ export class GameController extends Component {
 
     //Pass the stage
     private passStage(): void {
-        this.audioController.playAudio(AUDIO_TYPE.Appear);
-        this.woodView.runAnimation(WOOD_ANIMATION.Appear);
+
+        this.brokenController.runAnim();
+        this.audioController.playAudio(AUDIO_TYPE.LastHit);
+        this.woodSpr.active = false;
+        this.appleContainer.active = false;
+
+        setTimeout(() => {
+            this.woodSpr.active = true;
+            this.woodView.runAnimation(WOOD_ANIMATION.Appear);
+            this.audioController.playAudio(AUDIO_TYPE.Appear);
+            this.appleContainer.active = true;
+        }, 400);
+
         Global.gameStage++;
         Global.status = GAME_STATUS.GAME_READY;
     }
@@ -305,61 +339,30 @@ export class GameController extends Component {
         director.loadScene(Global.SCENE_NAME.Menu);
     }
 
-    /**Convert @vector from @entry to @end  */
-    private convert(entry: Node, end: Node, vector: Vec3): Vec3 {
-        const entryUI = entry.getComponent(UITransform);
-        const endUI = end.getComponent(UITransform);
-
-        let worldPos = entryUI.convertToWorldSpaceAR(vector);
-        return endUI.convertToNodeSpaceAR(worldPos);
-    }
-
     /** Create the knife */
     private generateKnife(): void {
-        //Push
-        let pos = new Vec3(0, -this.wood.getComponent(UITransform).width / 2 + 50, 0);
-        if (this.listKnife.length > 0) {
-            const lastKnife = this.listKnife[this.listKnife.length - 1].getComponent(Knife);
-            lastKnife.move(this.convert(this.wood, this.poolKnife, new Vec3(lastKnife.node.position.x, pos.y, 0)));
-            lastKnife.setAngle(-this.woodSpr.eulerAngles.z - 90)
-        }
         //Init 
         let element = instantiate(this.knifePrefab);
         element.getComponent(Sprite).spriteFrame = Global.sprKnife;
-        this.poolKnife.addChild(element);
+        element.getComponent(Knife).stop = this.wood.worldPosition.y - this.woodSpr.getComponent(UITransform).width / 2 - 70;
         this.listKnife.push(element);
+        this.poolKnife.addChild(element);
     }
 
     /**Control transition of knife */
     private moveKnife(): void {
-        for (let i = 0; i < this.listKnife.length - 1; i++) {
-
-            const knife = this.listKnife[i];
+        this.listKnife.filter(knife => knife.getComponent(Knife).getStatus() === 1).map((knife) => {
             //set angle
             let angle = knife.getComponent(Knife).getAngle();
-
-            //set position
-            let widthWood = this.woodSpr.getComponent(UITransform).width / 2 - 50;
-            let knifeAngle = 3.14 * (this.woodSpr.eulerAngles.z + angle) / 180;
-
-            let position = new Vec3(widthWood * Math.cos(knifeAngle), widthWood * Math.sin(knifeAngle), 0);
-            if (knife.getComponent(Knife).getStatus() === 1) {
-                knife.setPosition(this.convert(this.wood, knife.parent, position));
-                knife.setRotationFromEuler(new Vec3(0, 0, this.woodSpr.eulerAngles.z + angle + 90))
-            }
-        }
+            this.woodView.moveObject(knife, 50, angle, 90);
+        })
     }
 
     /**Control transition of apple */
     private moveApple(): void {
         this.listApple.map((apple) => {
             let angle = apple.getComponent(Apple).getAngle();
-            let widthWood = this.woodSpr.getComponent(UITransform).width / 2 - 40;
-            let appleAngle = 3.14 * (this.woodSpr.eulerAngles.z + angle) / 180;
-
-            let position = new Vec3(widthWood * Math.cos(appleAngle), widthWood * Math.sin(appleAngle), 0);
-            apple.setPosition(this.convert(this.wood, apple.parent, position));
-            apple.setRotationFromEuler(new Vec3(0, 0, this.woodSpr.eulerAngles.z - 90 + angle))
+            this.woodView.moveObject(apple, 45, angle, -90);
         })
     }
 }
