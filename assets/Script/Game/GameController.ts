@@ -317,8 +317,7 @@ export class GameController extends Component {
 
     //Pass the stage
     private passStage(): void {
-
-        this.brokenController.runAnim();
+        if (Global.gameStage % 5) this.brokenController.runAnim();
         this.audioController.playAudio(AUDIO_TYPE.LastHit);
         this.woodSpr.active = false;
         this.appleContainer.active = false;
@@ -336,6 +335,20 @@ export class GameController extends Component {
 
     //Acquire max stage
     private acquireMaxStage(): void {
+
+        let highApple: number | null = Number(localStorage.getItem('knife_hit_highapple')) ? Number(localStorage.getItem('knife_hit_highapple')) : 0;
+        let highStage: number | null = Number(localStorage.getItem('knife_hit_highstage')) ? Number(localStorage.getItem('knife_hit_highstage')) : 0;
+
+        if (highApple < this.appleScore) highApple = this.appleScore;
+        localStorage.setItem('knife_hit_highapple', `${highApple}`);
+
+        if (highStage < Global.gameStage) highStage = Global.gameStage;
+        localStorage.setItem('knife_hit_highstage', `${highStage - 1}`);
+
+        let highScore: number | null = Number(localStorage.getItem('knife_hit_highscore')) ? Number(localStorage.getItem('knife_hit_highscore')) : 0;
+        if (highScore < Global.score) highScore = Global.score;
+        localStorage.setItem('knife_hit_highscore', `${highScore}`);
+
         director.loadScene(Global.SCENE_NAME.Menu);
     }
 

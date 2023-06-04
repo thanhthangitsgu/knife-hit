@@ -136,3 +136,5 @@ export const GAME_COLOR = {
     color_active_stage: new Color(255, 173, 0, 255),
     color_default: new Color(255, 255, 255, 255)
 }
+
+export const KNIFE_APPLE = [100, 130, 150, 170, 200, 230, 250, 270, 280, 290, 300, 320, 330, 340, 350];

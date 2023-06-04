@@ -56,6 +56,10 @@ export class MenuController extends Component {
     private buttonKnife: Button;
 
     protected onLoad(): void {
+        const _index = localStorage.getItem("index_knife") ? localStorage.getItem("index_knife") : 1;
+        localStorage.setItem("index_knife", _index.toString());
+
+        
         //Turn of boardsetting
         this.boardSetting.active = false;
         this.knifeSetting.active = false;
@@ -81,8 +85,8 @@ export class MenuController extends Component {
             this.knifeSetting.active = true;
         })
 
-        this.labelScore.string = localStorage.getItem('knife_hit_highscore') ? `SCORE ${localStorage.getItem('knife_hit_highscore')}` : "";
-        this.labelStage.string = localStorage.getItem('knife_hit_highstage') ? `STAGE ${localStorage.getItem('knife_hit_highstage')}` : "";
+        this.labelScore.string = localStorage.getItem('knife_hit_highscore') ? `SCORE ${localStorage.getItem('knife_hit_highscore')}` : "SCORE 0";
+        this.labelStage.string = localStorage.getItem('knife_hit_highstage') ? `STAGE ${localStorage.getItem('knife_hit_highstage')}` : "STAGE 0";
     }
 
     protected start(): void {

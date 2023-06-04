@@ -62,8 +62,10 @@ export class EndController extends Component {
 
         let highScore: number | null = Number(localStorage.getItem('knife_hit_highscore')) ? Number(localStorage.getItem('knife_hit_highscore')) : 0;
         if (highScore < Global.score) {
-            highScore = Global.score;
             this.newBest.active = true;
+            console.log(this.newBest);
+            highScore = Global.score;
+
         }
         localStorage.setItem('knife_hit_highscore', `${highScore}`);
     }
@@ -72,7 +74,7 @@ export class EndController extends Component {
         setTimeout(() => {
             Global.score = 0;
             Global.gameStage = 1;
-        }, 1000);
+        }, 1500);
     }
 }
 

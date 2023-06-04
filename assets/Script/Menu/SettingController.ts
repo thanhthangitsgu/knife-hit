@@ -1,4 +1,4 @@
-import { _decorator, Button, Component, find, Node } from 'cc';
+import { _decorator, Button, Component, find, Label, Node } from 'cc';
 import { SETTING_STATUS } from '../Enum';
 import { Parameters } from '../Parameters';
 const { ccclass, property } = _decorator;
@@ -19,8 +19,18 @@ export class SettingController extends Component {
         type: Button,
         tooltip: "Button clear data"
     })
-
+    
     private buttonClear: Button | null = null;
+
+    @property({
+        type: Label
+    })
+    private labelScore: Label;
+
+    @property({
+        type: Label,
+    })
+    private labelStage: Label
 
     private soundStatus: SETTING_STATUS = SETTING_STATUS.ON;
 
@@ -51,6 +61,8 @@ export class SettingController extends Component {
         this.buttonClear.node.on(Button.EventType.CLICK, () => {
             localStorage.setItem('knife_hit_highscore', '0');
             localStorage.setItem('knife_hit_highapple', '0');
+            this.labelScore.string = 'SCORE 0';
+            this.labelStage.string = 'STAGE 0';
         })
     }
 
